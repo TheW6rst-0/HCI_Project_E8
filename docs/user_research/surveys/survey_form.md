@@ -2,7 +2,11 @@
 
 The survey consists of 20 multiple choice and open ended questions divided into 4 sections, each an important aspect of the 
 independant musicians career path.
-These questions will help us gather quantifiable data and qualitative insights into their struggles, habits, and expectations.
+These questions will help us gather quantifiable data and qualitative insights into their struggles, habits, and expectations. More specifically:
+- Booking Struggles – We confirm if the gig search process is really their biggest issue.
+- Promotion Tactics – We see where they already promote themselves & where our platform fits.
+- Feature Validation – We ensure we’re building exactly what they need.
+- Adoption Likelihood – We measure their actual interest in our platform.
 
 Survey link:
 https://docs.google.com/forms/d/e/1FAIpQLSees6GWDQOA0oVhg5lq-Af0mtAOS8aY1DJjSXvuhsExMRi5rg/viewform?usp=header
