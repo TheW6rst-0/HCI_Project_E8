@@ -4,7 +4,7 @@
 Gather numerical data and validate if musicians struggle with gig booking and discovery.
 
 ### Experiment Setup
-- Conduct 5 - 10 minute survey to 10 independant musicians.
+- Conduct a 20 question survey to 10 independant musicians.
 - Look for common pain points, behaviours, and workarounds.
 
 ### Results
