@@ -7,7 +7,7 @@ Independent musicians struggle to find and secure gigs because existing methodsâ
 Gather numerical data and validate if musicians struggle with gig booking and discovery.
 
 ### Experiment Setup
-- Conduct a 20 question survey to 10 independant musicians. [View survey_form](../docs/user_research/surveys/survey_form.md)
+- Conduct a 20 question survey to 10 independant musicians. [View survey_form](../../docs/user_research/surveys/survey_form.md)
 - Look for common pain points, behaviours, and workarounds.
 
 ### Results
