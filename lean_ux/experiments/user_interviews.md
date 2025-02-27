@@ -1,5 +1,8 @@
 # Experiment: User Surveys
 
+### Hypothesis to Test
+Independent musicians struggle to find and secure gigs because existing methods—such as social media, word-of-mouth, and direct outreach—are inefficient, unreliable, and lack transparency.
+
 ### Goal
 Gather numerical data and validate if musicians struggle with gig booking and discovery.
 
@@ -15,4 +18,4 @@ The Key Problems Musicians Face:
 - There’s no centralized system to connect musicians with venues.
 
 ### Conclusion
-The numbers prove the demand, and the open-ended responses confirm the frustrations musicians have with the current system.
+The hypothesis is validated. User data will be used to build personas and further our user reasearch.
