@@ -49,4 +49,4 @@ To ensure our platform meets real user needs, we conducted:
 - [See Iteration Log](lean_ux/iteration_log.md)
 - [See User Research Documentation](docs/user_research)
 
-Project and documentation can and will be subject to further changes and development.
+*Project and documentation can and will be subject to further changes and development.*
