@@ -23,7 +23,9 @@ Our research shows that **finding gigs is one of the biggest challenges** for in
 There are **no widely adopted platforms in Latin America** dedicated to booking live performances for independent artists. The closest competitor, **Musiqua (Spain)**, offers similar services but lacks a strong presence in this region.  
 
 ## Research & Methodology  
-To ensure our platform meets real user needs, we conducted:  
+As our main focus is to offer **a solution for musicians, by musicians**, we decided to adopt a Lean UX approach. [See lean_ux](lean_ux)
+
+Furthermore, to ensure our project meets real user needs, we conducted:  
 - **Surveys & User Interviews** – Validating musician and organizer pain points  
 - **Competitive Analysis** – Studying similar platforms (Musiqua, Vampr, Jammcard)  
 
