@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descubre Oportunidades y Músicos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .header-bg {
+      background-color: #3f0f80;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+    .nav-link {
+      color: white !important;
+    }
+    .nav-pills .nav-link.active {
+      background-color: #3f0f80;
+    }
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 2rem;
+    }
+    .btn-primary {
+      background-color: #3f0f80;
+      border-color: #3f0f80;
+    }
+  </style>
+</head>
+<body class="bg-light p-4">
+
+  <!-- Encabezado con la barra de navegación y búsqueda -->
+  <div class="header-bg">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" class="btn btn-light text-dark">Inicio</a>
+        <a href="#" class="btn btn-light text-dark">Eventos</a>
+      </div>
+      <div class="d-flex gap-3 align-items-center">
+        <div class="dropdown">
+          <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Perfil
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navegación secundaria -->
+  <nav class="mb-4">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="#">Buscar</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenedor de búsqueda y botones de categoría -->
+  <section class="card mb-4">
+    <div class="card-body">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <input type="text" class="form-control me-2" placeholder="Buscar oportunidades o músicos..." />
+            <button class="btn btn-light text-white" style="background-color: #6f42c1;">Buscar</button>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex flex-wrap gap-2 justify-content-md-end">
+          <button class="btn btn-primary" data-category="experiencia">Experiencia</button>
+          <button class="btn btn-primary" data-category="género">Género</button>
+          <button class="btn btn-primary" data-category="ubicación">Ubicación</button>
+          <button class="btn btn-primary" data-category="instrumento">Instrumento</button>
+          <button class="btn btn-primary" data-category="disponibilidad">Disponibilidad</button>
+        </div>
+      </div>
+      <div class="mt-3" id="filterOptions" style="display: none;"></div>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section class="row g-3">
+    <!-- Repite estos bloques dinámicamente con datos -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Perfil de Músico</h5>
+          <p><strong>Nombre:</strong> Juan Pérez</p>
+          <p><strong>Experiencia:</strong> Profesional</p>
+          <p><strong>Género:</strong> Rock</p>
+          <p><strong>Ubicación:</strong> Ciudad de México</p>
+          <a href="#" class="btn btn-link p-0" onclick="showDetails()">Ver Detalles</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Oportunidad de Evento</h5>
+          <p><strong>Descripción:</strong> Concierto en vivo para banda emergente.</p>
+          <p><strong>Ubicación:</strong> Guadalajara</p>
+          <p><strong>Requisitos:</strong> Experiencia en Rock</p>
+          <p><strong>Fecha:</strong> 25/05/2025</p>
+          <a href="#" class="btn btn-link p-0" onclick="showDetails()">Ver Detalles</a>
+        </div>
+      </div>
+    </div>
+    <!-- Agrega más resultados según sea necesario -->
+  </section>
+
+  <!-- Vista Detallada -->
+  <div class="card mt-4" id="detailedView" style="display: none;">
+    <div class="card-body">
+      <h4 class="card-title">Detalles del Resultado Seleccionado</h4>
+      <p>Aquí se mostrará la información completa del perfil o de la oportunidad. Desde esta vista se podrán enviar mensajes o iniciar solicitudes de reserva.</p>
+      <button class="btn btn-secondary" onclick="closeDetails()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const filtros = {
+      experiencia: `
+        <label for="experience" class="form-label">Experiencia:</label>
+        <select class="form-select" id="experience">
+          <option value="">Selecciona</option>
+          <option value="beginner">Principiante</option>
+          <option value="intermediate">Intermedio</option>
+          <option value="professional">Profesional</option>
+        </select>
+      `,
+      género: `
+        <label for="genre" class="form-label">Género:</label>
+        <select class="form-select" id="genre">
+          <option value="">Selecciona</option>
+          <option value="rock">Rock</option>
+          <option value="pop">Pop</option>
+          <option value="jazz">Jazz</option>
+          <option value="indie">Indie</option>
+          <option value="reggae">Reggae</option>
+        </select>
+      `,
+      ubicación: `
+        <label for="location" class="form-label">Ubicación:</label>
+        <select class="form-select" id="location">
+          <option value="">Selecciona</option>
+          <option value="CDMX">Ciudad de México</option>
+          <option value="Guadalajara">Guadalajara</option>
+          <option value="Monterrey">Monterrey</option>
+          <option value="Puebla">Puebla</option>
+        </select>
+      `,
+      instrumento: `
+        <label for="instrument" class="form-label">Instrumento:</label>
+        <select class="form-select" id="instrument">
+          <option value="">Selecciona</option>
+          <option value="guitar">Guitarra</option>
+          <option value="drums">Batería</option>
+          <option value="bass">Bajo</option>
+          <option value="vocals">Vocal</option>
+        </select>
+      `,
+      disponibilidad: `
+        <label for="availability" class="form-label">Disponibilidad:</label>
+        <select class="form-select" id="availability">
+          <option value="">Selecciona</option>
+          <option value="available">Disponible</option>
+          <option value="not-available">No Disponible</option>
+        </select>
+      `
+    };
+
+    $('[data-category]').on('click', function () {
+      const categoria = $(this).data('category');
+      const html = filtros[categoria] || '';
+      $('#filterOptions').html(html).toggle(html !== '');
+    });
+
+    function showDetails() {
+      $('#detailedView').slideDown();
+    }
+
+    function closeDetails() {
+      $('#detailedView').slideUp();
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
