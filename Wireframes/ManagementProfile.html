@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil - MusikHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .header-bg {
+      background-color: #3f0f80;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+    .form-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 2rem;
+    }
+    .form-label i {
+      margin-right: 0.5rem;
+      color: #430fa2;
+    }
+    .section-title {
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header-bg">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a href="Main.html" class="btn btn-light text-dark" id="btnInicio"><i class="fas fa-home"></i> Inicio</a>
+        <h5 class="mb-0 text-white">Editar Perfil</h5>
+      </div>
+      <div>
+        <button class="btn btn-outline-light" id="btnCerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario de edición de perfil -->
+  <div class="container">
+    <div class="form-container">
+      <h4 class="section-title"><i class="fas fa-user-edit"></i> Información personal</h4>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><i class="fas fa-user"></i> Nombre</label>
+          <input type="text" class="form-control" placeholder="Tu nombre">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label"><i class="fas fa-city"></i> Ciudad</label>
+          <select class="form-control" id="ciudad">
+            <option value="" disabled selected>Selecciona tu ciudad</option>
+            <option value="Ciudad de México">Ciudad de México</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Monterrey">Monterrey</option>
+            <option value="Puebla">Puebla</option>
+            <option value="Tijuana">Tijuana</option>
+            <option value="Cancún">Cancún</option>
+            <option value="Mérida">Mérida</option>
+            <option value="León">León</option>
+            <option value="Querétaro">Querétaro</option>
+            <option value="Chihuahua">Chihuahua</option>
+            <option value="San Luis Potosí">San Luis Potosí</option>
+            <option value="Toluca">Toluca</option>
+            <option value="Aguascalientes">Aguascalientes</option>
+            <option value="Morelia">Morelia</option>
+            <option value="Culiacán">Culiacán</option>
+            <option value="Hermosillo">Hermosillo</option>
+            <option value="Saltillo">Saltillo</option>
+            <option value="Veracruz">Veracruz</option>
+            <option value="Villahermosa">Villahermosa</option>
+            <option value="Oaxaca">Oaxaca</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-envelope"></i> Correo de contacto</label>
+        <input type="email" class="form-control" placeholder="ejemplo@correo.com">
+      </div>
+      <!-- Campos adicionales después del campo de correo de contacto -->
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-phone"></i> Número de teléfono</label>
+    <input type="tel" class="form-control" placeholder="Ej. +34 600 123 456">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-users"></i> Miembros</label>
+    <textarea class="form-control" rows="3" placeholder="Escribe los nombres de los miembros de tu banda o grupo..."></textarea>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-guitar"></i> Instrumentos que toca</label>
+    <div class="form-control" style="height: auto;" id="instrumentos">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="guitarra" value="Guitarra">
+        <label class="form-check-label" for="guitarra">Guitarra</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="bajo" value="Bajo">
+        <label class="form-check-label" for="bajo">Bajo</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="bateria" value="Batería">
+        <label class="form-check-label" for="bateria">Batería</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="piano" value="Piano">
+        <label class="form-check-label" for="piano">Piano</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="violin" value="Violín">
+        <label class="form-check-label" for="violin">Violín</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="voz" value="Voz">
+        <label class="form-check-label" for="voz">Voz</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="saxofon" value="Saxofón">
+        <label class="form-check-label" for="saxofon">Saxofón</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="trompeta" value="Trompeta">
+        <label class="form-check-label" for="trompeta">Trompeta</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-music"></i> Géneros</label>
+    <div class="form-control" style="height: 150px; overflow-y: auto;" id="generos">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="rock" value="Rock">
+        <label class="form-check-label" for="rock">Rock</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="jazz" value="Jazz">
+        <label class="form-check-label" for="jazz">Jazz</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="pop" value="Pop">
+        <label class="form-check-label" for="pop">Pop</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="reggaeton" value="Reggaetón">
+        <label class="form-check-label" for="reggaeton">Reggaetón</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="clasica" value="Clásica">
+        <label class="form-check-label" for="clasica">Clásica</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="electronica" value="Electrónica">
+        <label class="form-check-label" for="electronica">Electrónica</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="blues" value="Blues">
+        <label class="form-check-label" for="blues">Blues</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="hiphop" value="Hip-Hop">
+        <label class="form-check-label" for="hiphop">Hip-Hop</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nuevo apartado: Formación -->
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-users"></i> Formación</label>
+    <div class="form-control" style="height: auto;" id="formacion">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="solo" value="Solo">
+        <label class="form-check-label" for="solo">Solo</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="duo" value="Dúo">
+        <label class="form-check-label" for="duo">Dúo</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="trio" value="Trío">
+        <label class="form-check-label" for="trio">Trío</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="cuarteto" value="Cuarteto">
+        <label class="form-check-label" for="cuarteto">Cuarteto</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="masDeCuatro" value="Más de cuatro">
+        <label class="form-check-label" for="masDeCuatro">Más de cuatro</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-3">
+  <label class="form-label"><i class="fas fa-briefcase"></i> Experiencia</label>
+  <textarea class="form-control" rows="3" placeholder="Describe tu experiencia musical..."></textarea>
+</div>
+
+<div class="mb-3">
+  <label class="form-label"><i class="fas fa-book-open"></i> Repertorio</label>
+  <textarea class="form-control" rows="3" placeholder="Lista o descripción de tu repertorio..."></textarea>
+</div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><i class="fas fa-image"></i> Foto de perfil</label>
+          <input type="file" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label"><i class="fas fa-image"></i> Imagen de portada</label>
+          <input type="file" class="form-control">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-info-circle"></i> Acerca de ti</label>
+        <textarea class="form-control" rows="4" placeholder="Cuenta detalles que consideres importantes a tu audiencia"></textarea>
+      </div>
+
+      <h4 class="section-title"><i class="fas fa-link"></i> Redes Sociales</h4>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><i class="fab fa-instagram"></i> Instagram</label>
+          <input type="url" class="form-control" placeholder="https://instagram.com/tu_usuario">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label"><i class="fab fa-youtube"></i> YouTube</label>
+          <input type="url" class="form-control" placeholder="https://youtube.com/tu_canal">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><i class="fab fa-tiktok"></i> TikTok</label>
+          <input type="url" class="form-control" placeholder="https://tiktok.com/@tu_usuario">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label"><i class="fab fa-spotify"></i> Spotify</label>
+          <input type="url" class="form-control" placeholder="https://spotify.com/tu_musica">
+        </div>
+      </div>
+
+
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-secondary" id="btnCancelar"><i class="fas fa-arrow-left"></i> Cancelar</button>
+        <button class="btn btn-purple" id="btnGuardar"><i class="fas fa-save"></i> Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Botón Guardar
+    document.getElementById('btnGuardar').addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // Obtener los valores del formulario
+      const usuario = {
+        name: document.querySelector('input[placeholder="Tu nombre"]').value,
+        city: document.querySelector('#ciudad').value,
+        email: document.querySelector('input[placeholder="ejemplo@correo.com"]').value,
+        phone: document.querySelector('input[placeholder="Ej. +34 600 123 456"]').value,
+        members: document.querySelector('textarea[placeholder="Escribe los nombres de los miembros de tu banda o grupo..."]').value,
+        instruments: Array.from(document.querySelectorAll('#instrumentos .form-check-input:checked'))
+          .map(checkbox => checkbox.value),
+        genres: Array.from(document.querySelectorAll('#generos .form-check-input:checked'))
+          .map(checkbox => checkbox.value),
+        formation: Array.from(document.querySelectorAll('#formacion .form-check-input:checked'))
+          .map(checkbox => checkbox.value),
+        experience: document.querySelector('textarea[placeholder="Describe tu experiencia musical..."]').value,
+        repertoire: document.querySelector('textarea[placeholder="Lista o descripción de tu repertorio..."]').value,
+        about: document.querySelector('textarea[placeholder="Cuenta detalles que consideres importantes a tu audiencia"]').value,
+        instagram: document.querySelector('input[placeholder="https://instagram.com/tu_usuario"]').value,
+        youtube: document.querySelector('input[placeholder="https://youtube.com/tu_canal"]').value,
+        tiktok: document.querySelector('input[placeholder="https://tiktok.com/@tu_usuario"]').value,
+        spotify: document.querySelector('input[placeholder="https://spotify.com/tu_musica"]').value
+      };
+
+      // Guardar los datos en localStorage
+      localStorage.setItem('usuarioActual', JSON.stringify(usuario));
+
+      // Redirigir al dashboard
+      window.location.href = 'dashboard-musico.html';
+    });
+
+    // Botón Cancelar
+    document.getElementById('btnCancelar').addEventListener('click', function() {
+      window.location.href = 'dashboard-musico.html';
+    });
+
+    // Botón Inicio
+    document.getElementById('btnInicio').addEventListener('click', function() {
+      window.location.href = 'Main.html';
+    });
+
+    // Botón Cerrar sesión
+    document.getElementById('btnCerrarSesion').addEventListener('click', function() {
+      localStorage.removeItem('usuarioActual');
+      localStorage.removeItem('rolActual');
+      window.location.href = 'Main.html';
+    });
+  </script>
+</body>
+</html>

@@ -93,15 +93,72 @@
           <input type="number" class="form-control" id="amount" placeholder="$0.00">
         </div>
 
-        <div class="mb-3">
-          <label for="location" class="form-label">Ubicación del evento*</label>
-          <input type="text" class="form-control" id="location" placeholder="Ciudad, lugar" required>
-        </div>
+        <div class="row mb-3">
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-map-marker-alt"></i> Ciudad</label>
+    <select class="form-control" id="ciudad">
+      <option value="" disabled selected>Selecciona tu ciudad</option>
+      <option value="Ciudad de México">Ciudad de México</option>
+      <option value="Guadalajara">Guadalajara</option>
+      <option value="Monterrey">Monterrey</option>
+      <option value="Puebla">Puebla</option>
+      <option value="Tijuana">Tijuana</option>
+      <option value="Cancún">Cancún</option>
+      <option value="Mérida">Mérida</option>
+      <option value="León">León</option>
+      <option value="Querétaro">Querétaro</option>
+      <option value="Chihuahua">Chihuahua</option>
+      <option value="San Luis Potosí">San Luis Potosí</option>
+      <option value="Toluca">Toluca</option>
+      <option value="Aguascalientes">Aguascalientes</option>
+      <option value="Morelia">Morelia</option>
+      <option value="Culiacán">Culiacán</option>
+      <option value="Hermosillo">Hermosillo</option>
+      <option value="Saltillo">Saltillo</option>
+      <option value="Veracruz">Veracruz</option>
+      <option value="Villahermosa">Villahermosa</option>
+      <option value="Oaxaca">Oaxaca</option>
+    </select>
+  </div>
+</div>
 
         <div class="mb-3">
-          <label for="genre" class="form-label">Géneros requeridos / habilidades*</label>
-          <input type="text" class="form-control" id="genre" placeholder="Ej. jazz, pop acústico, mariachi" required>
-        </div>
+  <label class="form-label"><i class="fas fa-music"></i> Géneros requeridos / habilidades*</label>
+  <div class="form-control" style="height: auto;">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="rock" value="Rock">
+      <label class="form-check-label" for="rock">Rock</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="jazz" value="Jazz">
+      <label class="form-check-label" for="jazz">Jazz</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="pop" value="Pop">
+      <label class="form-check-label" for="pop">Pop</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="clasica" value="Clásica">
+      <label class="form-check-label" for="clasica">Clásica</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="reggaeton" value="Reggaetón">
+      <label class="form-check-label" for="reggaeton">Reggaetón</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="electronica" value="Electrónica">
+      <label class="form-check-label" for="electronica">Electrónica</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="hiphop" value="Hip-Hop">
+      <label class="form-check-label" for="hiphop">Hip-Hop</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="blues" value="Blues">
+      <label class="form-check-label" for="blues">Blues</label>
+    </div>
+  </div>
+</div>
 
         <div class="mb-3">
           <label for="deadline" class="form-label">Fecha límite para aplicar*</label>
