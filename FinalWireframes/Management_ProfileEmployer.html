@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil Empleador - MusikHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .header-bg {
+      background-color: #3f0f80;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+    .form-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 2rem;
+    }
+    .form-label i {
+      margin-right: 0.5rem;
+      color: #430fa2;
+    }
+    .section-title {
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <div class="header-bg">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" class="btn btn-light text-dark"><i class="fas fa-home"></i> Inicio</a>
+        <h5 class="mb-0 text-white">Editar Perfil de Empleador</h5>
+      </div>
+      <div>
+        <button class="btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <div class="container">
+    <div class="form-container">
+      <h4 class="section-title"><i class="fas fa-user-edit"></i> Información del empleador</h4>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><i class="fas fa-building"></i> Nombre</label>
+          <input type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label"><i class="fas fa-map-marker-alt"></i> Ciudad</label>
+          <select class="form-control" id="ciudad">
+            <option value="" disabled selected>Selecciona tu ciudad</option>
+            <option value="Ciudad de México">Ciudad de México</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Monterrey">Monterrey</option>
+            <option value="Puebla">Puebla</option>
+            <option value="Tijuana">Tijuana</option>
+            <option value="Cancún">Cancún</option>
+            <option value="Mérida">Mérida</option>
+            <option value="León">León</option>
+            <option value="Querétaro">Querétaro</option>
+            <option value="Chihuahua">Chihuahua</option>
+            <option value="San Luis Potosí">San Luis Potosí</option>
+            <option value="Toluca">Toluca</option>
+            <option value="Aguascalientes">Aguascalientes</option>
+            <option value="Morelia">Morelia</option>
+            <option value="Culiacán">Culiacán</option>
+            <option value="Hermosillo">Hermosillo</option>
+            <option value="Saltillo">Saltillo</option>
+            <option value="Veracruz">Veracruz</option>
+            <option value="Villahermosa">Villahermosa</option>
+            <option value="Oaxaca">Oaxaca</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-envelope"></i> Correo de contacto</label>
+        <input type="email" class="form-control" placeholder="ejemplo@correo.com">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-phone"></i> Teléfono</label>
+        <input type="tel" class="form-control" placeholder="Ej. +52 123 456 7890">
+      </div>
+
+      <!-- Tipos de eventos -->
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-calendar-alt"></i> Tipo de eventos</label>
+        <div class="form-control" style="height: auto;">
+          <div class="form-check">
+            <input class="form-check-input event-checkbox" type="checkbox" id="boda" value="Boda">
+            <label class="form-check-label" for="boda">Boda</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input event-checkbox" type="checkbox" id="festival" value="Festival">
+            <label class="form-check-label" for="festival">Festival</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input event-checkbox" type="checkbox" id="corporativo" value="Corporativo">
+            <label class="form-check-label" for="corporativo">Corporativo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input event-checkbox" type="checkbox" id="feria" value="Feria">
+            <label class="form-check-label" for="feria">Feria</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input event-checkbox" type="checkbox" id="privado" value="Privado">
+            <label class="form-check-label" for="privado">Privado</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-image"></i> Imagen de perfil</label>
+        <input type="file" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-image"></i> Imagen de portada</label>
+        <input type="file" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-info-circle"></i> Presentación</label>
+        <textarea class="form-control" rows="4" placeholder="Preséntate como empleador o promotor musical..."></textarea>
+      </div>
+
+      <!-- Requisitos comunes -->
+      <div class="mb-3">
+        <label class="form-label"><i class="fas fa-list-check"></i> Requisitos</label>
+        <div class="form-control" style="height: auto;">
+          <div class="form-check">
+            <input class="form-check-input requirement-checkbox" type="checkbox" id="sonidoPropio" value="Sonido propio">
+            <label class="form-check-label" for="sonidoPropio">Sonido propio</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input requirement-checkbox" type="checkbox" id="experienciaMinima" value="Experiencia mínima">
+            <label class="form-check-label" for="experienciaMinima">Experiencia mínima</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input requirement-checkbox" type="checkbox" id="disponibilidadViajar" value="Disponibilidad para viajar">
+            <label class="form-check-label" for="disponibilidadViajar">Disponibilidad para viajar</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input requirement-checkbox" type="checkbox" id="instrumentosPropios" value="Instrumentos propios">
+            <label class="form-check-label" for="instrumentosPropios">Instrumentos propios</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input requirement-checkbox" type="checkbox" id="puntualidad" value="Puntualidad">
+            <label class="form-check-label" for="puntualidad">Puntualidad</label>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="section-title"><i class="fas fa-link"></i> Redes Sociales</h4>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><i class="fab fa-linkedin"></i> LinkedIn</label>
+          <input type="url" class="form-control" placeholder="https://linkedin.com/in/tu_usuario">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label"><i class="fab fa-facebook"></i> Facebook</label>
+          <input type="url" class="form-control" placeholder="https://facebook.com/tu_empresa">
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-secondary me-md-2" id="btnCancelar"><i class="fas fa-arrow-left"></i> Cancelar</button>
+        <button class="btn btn-purple btn-lg"><i class="fas fa-save"></i> Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Cargar datos existentes en el formulario si están en localStorage
+      const empleador = JSON.parse(localStorage.getItem('empleadorActual')) || {};
+      document.querySelector('input[placeholder="Nombre"]').value = empleador.name || '';
+      document.querySelector('#ciudad').value = empleador.city || '';
+      document.querySelector('input[placeholder="ejemplo@correo.com"]').value = empleador.email || '';
+      document.querySelector('input[placeholder="Ej. +52 123 456 7890"]').value = empleador.phone || '';
+      document.querySelector('textarea[placeholder="Preséntate como empleador o promotor musical..."]').value = empleador.about || '';
+
+      // Marcar los checkboxes de "Tipos de eventos"
+      if (empleador.events) {
+        empleador.events.forEach(event => {
+          const checkbox = document.querySelector(`.event-checkbox[value="${event}"]`);
+          if (checkbox) checkbox.checked = true;
+        });
+      }
+
+      // Marcar los checkboxes de "Requisitos comunes"
+      if (empleador.requirements) {
+        empleador.requirements.forEach(req => {
+          const checkbox = document.querySelector(`.requirement-checkbox[value="${req}"]`);
+          if (checkbox) checkbox.checked = true;
+        });
+      }
+
+      // Guardar datos al hacer clic en "Guardar cambios"
+      document.querySelector('.btn-purple').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const empleadorData = {
+          name: document.querySelector('input[placeholder="Nombre"]').value,
+          city: document.querySelector('#ciudad').value,
+          email: document.querySelector('input[placeholder="ejemplo@correo.com"]').value,
+          phone: document.querySelector('input[placeholder="Ej. +52 123 456 7890"]').value,
+          about: document.querySelector('textarea[placeholder="Preséntate como empleador o promotor musical..."]').value,
+          events: Array.from(document.querySelectorAll('.event-checkbox:checked')).map(cb => cb.value),
+          requirements: Array.from(document.querySelectorAll('.requirement-checkbox:checked')).map(cb => cb.value),
+          linkedin: document.querySelector('input[placeholder="https://linkedin.com/in/tu_usuario"]').value,
+          facebook: document.querySelector('input[placeholder="https://facebook.com/tu_empresa"]').value
+        };
+
+        // Guardar en localStorage
+        localStorage.setItem('empleadorActual', JSON.stringify(empleadorData));
+
+        // Redirigir al dashboard
+        window.location.href = 'dashboard-empleador.html';
+      });
+
+      // Redirigir al dashboard al hacer clic en "Cancelar"
+      document.getElementById('btnCancelar').addEventListener('click', () => {
+        window.location.href = 'dashboard-empleador.html';
+      });
+
+      // Redirigir al inicio al hacer clic en "Inicio"
+      document.querySelector('.btn-light.text-dark').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = 'Main.html'; // Cambia 'Main.html' por la URL de tu página de inicio
+      });
+
+      document.querySelector('.btn-outline-light').addEventListener('click', () => {
+        // Eliminar datos del usuario del localStorage
+        localStorage.removeItem('empleadorActual');
+
+        // Redirigir al inicio de sesión o página principal
+        window.location.href = 'Main.html'; // Cambia 'Main.html' por la URL de tu página de inicio de sesión
+      });
+    });
+  </script>
+</body>
+</html>

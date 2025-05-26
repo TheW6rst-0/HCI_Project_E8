@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MusikHub</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+    .navbar {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .hero {
+      background: linear-gradient(to right, #0d035a, #2b0470);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: left;
+    }
+    .hero input {
+      max-width: 450px;
+    }
+    .auth-btn {
+      color: white;
+      background-color: #430fa2;
+      border: none;
+    }
+    .btn-purple {
+      background-color: #430fa2;
+      border: none;
+      color: white;
+    }
+    .btn-purple:hover {
+      background-color: #3a0d92;
+    }
+    .searchbar::placeholder {
+      color: #aaa;
+    }
+    .help-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #4e0ead;
+      color: white;
+      border-radius: 30px;
+      padding: 10px 20px;
+    }
+    .feed {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+    .musician-card {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .musician-card img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+    .nav-tabs .nav-link {
+      color: #430fa2;
+      font-weight: bold;
+    }
+    .nav-tabs .nav-link.active {
+      background-color: #e9e9f8;
+      border-color: #dee2e6 #dee2e6 #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand fw-bold" href="#">TBD</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+      </ul>
+      <div id="auth-section">
+        <button class="btn auth-btn" id="openAuthModal">
+          <i class="fas fa-user"></i> Iniciar sesión / Registrarse
+        </button>
+      </div>
+      <button id="perfilBtn" class="btn btn-outline-primary d-none ms-2">Perfil</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero d-flex align-items-center">
+    <div class="container">
+      <h1 class="display-5">Conecta músicos y empleadores de manera sencilla</h1>
+      <div class="d-flex mt-4">
+        <input type="text" class="form-control me-2 searchbar" placeholder="Ej: Grupo para boda, DJ, etc...">
+        <button class="btn btn-light text-dark" id="btnBuscar">Buscar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido destacado -->
+  <div class="container feed my-5">
+    <h3 class="mb-4">Músicos Relevantes</h3>
+    <div class="row">
+      <div class="col-md-3 musician-card">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Músico 1">
+        <h5>Álvaro Ruiz</h5>
+        <p>Guitarrista Flamenco</p>
+      </div>
+      <div class="col-md-3 musician-card">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Músico 2">
+        <h5>Lola García</h5>
+        <p>Vocalista Pop</p>
+      </div>
+      <div class="col-md-3 musician-card">
+        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Músico 3">
+        <h5>Julián Torres</h5>
+        <p>DJ Electrónica</p>
+      </div>
+      <div class="col-md-3 musician-card">
+        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Músico 4">
+        <h5>Clara Martínez</h5>
+        <p>Saxofonista Jazz</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón de ayuda -->
+  <button class="help-btn"><i class="fas fa-question-circle"></i> ¿Necesitas ayuda?</button>
+
+  <!-- Modal de Autenticación -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Pestañas -->
+        <ul class="nav nav-tabs" id="authTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Iniciar sesión</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Registrarse</button>
+          </li>
+        </ul>
+        <div class="modal-body">
+          <div class="tab-content" id="authTabContent">
+            <!-- Login -->
+            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+              <form id="login-form">
+                <div class="mb-3">
+                  <label for="email-login" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" id="email-login" required>
+                </div>
+                <div class="mb-3">
+                  <label for="password-login" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="password-login" required>
+                </div>
+                <button type="submit" class="btn btn-purple w-100">Ingresar</button>
+              </form>
+            </div>
+            <!-- Registro -->
+            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+              <form id="register-form">
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" required>
+                </div>
+                <div class="mb-3">
+                  <label for="correo" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" id="correo" required>
+                </div>
+                <div class="mb-3">
+                  <label for="contrasena" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="contrasena" required>
+                </div>
+                <div class="mb-3">
+                  <label for="rol" class="form-label">¿Eres músico o empleador?</label>
+                  <select class="form-select" id="rol" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="musico">Músico</option>
+                    <option value="empleador">Empleador</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-purple w-100">Continuar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Footer del modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    $('#openAuthModal').click(function () {
+      const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+      authModal.show();
+    });
+
+    function actualizarUIConSesion() {
+  const usuarioActualRaw = localStorage.getItem('usuarioActual');
+  if (!usuarioActualRaw) return;
+
+  try {
+    const usuarioActual = JSON.parse(usuarioActualRaw);
+    const nombre = usuarioActual.nombre || 'Usuario';
+
+    $('#auth-section').html(`
+      <div class="d-flex align-items-center">
+        <span class="me-2 fw-semibold text-dark">Hola, ${nombre}</span>
+        <button class="btn btn-outline-danger btn-sm" id="cerrarSesion">Cerrar sesión</button>
+      </div>
+    `);
+  } catch (e) {
+    console.error("Error al cargar usuarioActual:", e);
+    localStorage.removeItem('usuarioActual'); // limpiar si está corrupto
+  }
+}
+
+
+    $('#register-form').submit(function (e) {
+      e.preventDefault();
+      const nombre = $('#nombre').val().trim();
+      const correo = $('#correo').val().trim().toLowerCase();
+      const contrasena = $('#contrasena').val();
+      const rol = $('#rol').val();
+
+      if (!nombre || !correo || !contrasena || !rol) {
+        alert('Por favor completa todos los campos.');
+        return;
+      }
+
+      let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      const existente = usuarios.find(u => u.correo === correo);
+      if (existente) {
+        alert('Este correo ya está registrado.');
+        return;
+      }
+
+      const nuevoUsuario = { nombre, correo, contrasena, rol };
+      usuarios.push(nuevoUsuario);
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      localStorage.setItem('usuarioActual', JSON.stringify(nuevoUsuario));
+      localStorage.setItem('rolActual', rol);
+
+      alert('Registro exitoso. Has iniciado sesión.');
+      $('#register-form')[0].reset();
+      bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+      actualizarUIConSesion();
+      location.reload();
+    });
+
+    $('#login-form').submit(function (e) {
+      e.preventDefault();
+      const email = $('#email-login').val().trim().toLowerCase();
+      const password = $('#password-login').val();
+
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      const usuario = usuarios.find(u => u.correo === email && u.contrasena === password);
+
+      if (usuario) {
+        localStorage.setItem('usuarioActual', JSON.stringify(usuario));
+        localStorage.setItem('rolActual', usuario.rol);
+        alert('Inicio de sesión exitoso');
+        bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+        location.reload();
+      } else {
+        alert('Correo o contraseña incorrectos');
+      }
+    });
+
+    $(document).on('click', '#cerrarSesion', function () {
+      localStorage.removeItem('usuarioActual');
+      localStorage.removeItem('rolActual');
+      location.reload();
+    });
+
+    $(document).ready(function () {
+      actualizarUIConSesion();
+
+      const rol = localStorage.getItem('rolActual');
+if (rol === 'musico' || rol === 'empleador') {
+  $('#perfilBtn').removeClass('d-none');
+  $('#perfilBtn').click(() => {
+    if (rol === 'musico') {
+      window.location.href = 'dashboard-musico.html';
+    } else if (rol === 'empleador') {
+      window.location.href = 'dashboard-empleador.html';
+    }
+  });
+}
+
+    });
+
+    $('.help-btn').click(function () {
+      alert("Aquí puedes consultar nuestras preguntas frecuentes y contactar soporte.");
+    });
+
+    // Redirige al buscador al hacer clic en el botón "Buscar"
+    $('#btnBuscar').click(function() {
+      window.location.href = 'Buscador.html';
+    });
+  </script>
+</body>
+</html>

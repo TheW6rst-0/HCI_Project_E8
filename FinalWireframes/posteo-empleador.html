@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicar Oferta - MusikHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .header-bg {
+      background-color: #3f0f80;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 2rem;
+    }
+    .section-title {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #3f0f80;
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado -->
+  <div class="header-bg">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" class="btn btn-light text-dark" id="homeBtn">Inicio</a>
+        <input type="text" class="form-control" placeholder="Busca músicos, trabajos, eventos..." style="width: 300px;">
+        <button class="btn btn-light text-dark" id="btnBuscar">Buscar</button>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="fas fa-cog"></i> Configuración
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" id="switchToMusician">Cambiar a cuenta de músico</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario de publicación -->
+  <div class="container">
+    <div class="form-section">
+      <div class="section-title">Publicar Nueva Oferta</div>
+      <form>
+        <div class="mb-3">
+          <label for="title" class="form-label">Título*</label>
+          <input type="text" class="form-control" id="title" placeholder="Ej. Banda para evento privado" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción del evento*</label>
+          <textarea class="form-control" id="description" rows="4" required></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="date" class="form-label">Fecha*</label>
+            <input type="date" class="form-control" id="date" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="time" class="form-label">Hora*</label>
+            <input type="time" class="form-control" id="time" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="compensation" class="form-label">Tipo de compensación*</label>
+          <select class="form-select" id="compensation" required>
+            <option value="">Selecciona...</option>
+            <option value="paid">Pago fijo</option>
+            <option value="revshare">Porcentaje de ganancias</option>
+            <option value="unpaid">Sin pago</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="amount" class="form-label">Monto aproximado (si aplica)</label>
+          <input type="number" class="form-control" id="amount" placeholder="$0.00">
+        </div>
+
+        <div class="row mb-3">
+  <div class="col-md-6">
+    <label class="form-label"><i class="fas fa-map-marker-alt"></i> Ciudad</label>
+    <select class="form-control" id="ciudad">
+      <option value="" disabled selected>Selecciona tu ciudad</option>
+      <option value="Ciudad de México">Ciudad de México</option>
+      <option value="Guadalajara">Guadalajara</option>
+      <option value="Monterrey">Monterrey</option>
+      <option value="Puebla">Puebla</option>
+      <option value="Tijuana">Tijuana</option>
+      <option value="Cancún">Cancún</option>
+      <option value="Mérida">Mérida</option>
+      <option value="León">León</option>
+      <option value="Querétaro">Querétaro</option>
+      <option value="Chihuahua">Chihuahua</option>
+      <option value="San Luis Potosí">San Luis Potosí</option>
+      <option value="Toluca">Toluca</option>
+      <option value="Aguascalientes">Aguascalientes</option>
+      <option value="Morelia">Morelia</option>
+      <option value="Culiacán">Culiacán</option>
+      <option value="Hermosillo">Hermosillo</option>
+      <option value="Saltillo">Saltillo</option>
+      <option value="Veracruz">Veracruz</option>
+      <option value="Villahermosa">Villahermosa</option>
+      <option value="Oaxaca">Oaxaca</option>
+    </select>
+  </div>
+</div>
+
+        <div class="mb-3">
+  <label class="form-label"><i class="fas fa-music"></i> Géneros requeridos / habilidades*</label>
+  <div class="form-control" style="height: auto;">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="rock" value="Rock">
+      <label class="form-check-label" for="rock">Rock</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="jazz" value="Jazz">
+      <label class="form-check-label" for="jazz">Jazz</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="pop" value="Pop">
+      <label class="form-check-label" for="pop">Pop</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="clasica" value="Clásica">
+      <label class="form-check-label" for="clasica">Clásica</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="reggaeton" value="Reggaetón">
+      <label class="form-check-label" for="reggaeton">Reggaetón</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="electronica" value="Electrónica">
+      <label class="form-check-label" for="electronica">Electrónica</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="hiphop" value="Hip-Hop">
+      <label class="form-check-label" for="hiphop">Hip-Hop</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="blues" value="Blues">
+      <label class="form-check-label" for="blues">Blues</label>
+    </div>
+  </div>
+</div>
+
+        <div class="mb-3">
+          <label for="deadline" class="form-label">Fecha límite para aplicar*</label>
+          <input type="date" class="form-control" id="deadline" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="flyer" class="form-label">Sube una imagen o flyer (opcional)</label>
+          <input class="form-control" type="file" id="flyer">
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <button type="cancel" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Publicar Oferta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    // Publicar oferta
+    $('form').on('submit', function(e) {
+      e.preventDefault();
+
+      // Recolectar datos del formulario
+      const oferta = {
+        titulo: $('#title').val(),
+        descripcion: $('#description').val(),
+        fecha: $('#date').val(),
+        hora: $('#time').val(),
+        compensacion: $('#compensation').val(),
+        monto: $('#amount').val(),
+        ciudad: $('#ciudad').val(),
+        generos: $('.form-check-input:checked').map(function(){ return this.value; }).get(),
+        deadline: $('#deadline').val(),
+        // Puedes agregar aquí la lógica para guardar la imagen si lo deseas
+        fechaPublicacion: new Date().toISOString()
+      };
+
+      // Obtener las ofertas existentes o crear un array nuevo
+      let ofertas = JSON.parse(localStorage.getItem('ofertasEmpleador')) || [];
+      ofertas.push(oferta);
+      localStorage.setItem('ofertasEmpleador', JSON.stringify(ofertas));
+
+      alert('Oferta publicada con éxito!');
+      window.location.href = 'dashboard-empleador.html';
+    });
+
+    // Cerrar sesión
+    $('#logoutBtn').click(() => {
+      if (confirm('¿Estás seguro de que deseas cerrar sesión? Perderás todo el progreso de tu publicación si continúas.')) {
+        localStorage.removeItem('empleadorActual');
+        window.location.href = 'Main.html';
+      }
+    });
+
+    // Cancelar publicación
+    $('button[type="cancel"]').click((e) => {
+      e.preventDefault();
+      if (confirm('¿Estás seguro de que deseas cancelar? Perderás todo el progreso de tu publicación si continúas.')) {
+        window.location.href = 'dashboard-empleador.html';
+      }
+    });
+
+    // Ir al inicio
+    $('#homeBtn').click(() => {
+      if (confirm('¿Estás seguro de que deseas volver a la página de inicio? Perderás todo el progreso de tu publicación si continúas.')) {
+        window.location.href = 'Main.html';
+      }
+    });
+
+    // Cambiar a cuenta de músico
+    $('#switchToMusician').click(() => {
+      if (confirm('¿Estás seguro de que deseas cambiar a la cuenta de músico? Perderás todo el progreso de tu publicación si continúas.')) {
+        window.location.href = 'dashboard-musico.html';
+      }
+    });
+
+    $('#btnBuscar').click(function() {
+      window.location.href = 'Buscador.html';
+    });
+  });
+  </script>
+</body>
+</html>

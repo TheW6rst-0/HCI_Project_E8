@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descubre Oportunidades y Músicos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .header-bg {
+      background-color: #3f0f80;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 2rem;
+    }
+    .btn-primary {
+      background-color: #3f0f80;
+      border-color: #3f0f80;
+    }
+  </style>
+</head>
+<body class="bg-light p-4">
+
+  <!-- Encabezado con la barra de navegación y búsqueda -->
+  <div class="header-bg">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <img src="logo.png" alt="Logo" class="img-fluid" style="width: 50px; height: 50px;" />      
+        <a href="#" class="btn btn-light text-dark" id="btninicio">Inicio</a>
+      </div>
+      <div class="d-flex gap-3 align-items-center">
+        <div class="dropdown">
+          <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Perfil
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor de búsqueda y botones de categoría -->
+  <section class="card mb-4">
+    <div class="card-body">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <!-- Barra de búsqueda eliminada -->
+            <select class="form-select me-2" id="tipoBusqueda" style="width: 150px;">
+              <option value="ambos">Ambos</option>
+              <option value="musicos">Músicos</option>
+              <option value="ofertas">Ofertas</option>
+            </select>
+            <button class="btn btn-light text-white" style="background-color: #6f42c1;">Buscar</button>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex flex-wrap gap-2 justify-content-md-end">
+          <button class="btn btn-primary" data-category="género">Género</button>
+          <button class="btn btn-primary" data-category="ubicación">Ubicación</button>
+          <button class="btn btn-primary" data-category="instrumento">Instrumento</button>
+        </div>
+      </div>
+      <div class="mt-3" id="filterOptions" style="display: none;"></div>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section class="row g-3">
+    <!-- Los resultados se llenan dinámicamente por JavaScript -->
+  </section>
+
+  <!-- Vista Detallada -->
+  <div class="card mt-4" id="detailedView" style="display: none;">
+    <div class="card-body">
+      <h4 class="card-title">Detalles del Resultado Seleccionado</h4>
+      <p>Aquí se mostrará la información completa del perfil o de la oportunidad. Desde esta vista se podrán enviar mensajes o iniciar solicitudes de reserva.</p>
+      <button class="btn btn-secondary" onclick="closeDetails()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const filtros = {
+      género: `
+        <label for="genre" class="form-label">Género:</label>
+        <select class="form-select" id="genre">
+          <option value="">Selecciona</option>
+          <option value="rock">Rock</option>
+          <option value="pop">Pop</option>
+          <option value="jazz">Jazz</option>
+          <option value="indie">Indie</option>
+          <option value="reggae">Reggae</option>
+        </select>
+      `,
+      ubicación: `
+        <label for="location" class="form-label">Ubicación:</label>
+        <select class="form-select" id="location">
+          <option value="">Selecciona</option>
+          <option value="CDMX">Ciudad de México</option>
+          <option value="Guadalajara">Guadalajara</option>
+          <option value="Monterrey">Monterrey</option>
+          <option value="Puebla">Puebla</option>
+        </select>
+      `,
+      instrumento: `
+        <label for="instrument" class="form-label">Instrumento:</label>
+        <select class="form-select" id="instrument">
+          <option value="">Selecciona</option>
+          <option value="guitar">Guitarra</option>
+          <option value="drums">Batería</option>
+          <option value="bass">Bajo</option>
+          <option value="vocals">Vocal</option>
+        </select>
+      `
+    };
+
+    // Mostrar el filtro correspondiente al hacer click en los botones
+    $('[data-category]').on('click', function () {
+      const categoria = $(this).data('category');
+      const html = filtros[categoria] || '';
+      $('#filterOptions').html(html).toggle(html !== '');
+    });
+
+    function showDetails() {
+      $('#detailedView').slideDown();
+    }
+
+    function closeDetails() {
+      $('#detailedView').slideUp();
+    }
+  </script>
+
+  <script>
+$(document).ready(function() {
+  // Cargar datos de músicos y ofertas
+  const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+  const ofertas = JSON.parse(localStorage.getItem('ofertasEmpleador')) || [];
+
+  // Función para renderizar resultados
+  function renderResultados(filtradosUsuarios, filtradasOfertas) {
+    const $section = $('section.row.g-3');
+    $section.empty();
+
+    // Músicos
+    filtradosUsuarios.forEach(usuario => {
+      if (usuario.rol === 'musico') {
+        $section.append(`
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Perfil de Músico</h5>
+                <p><strong>Nombre:</strong> ${usuario.nombre || 'N/A'}</p>
+                <p><strong>Género:</strong> ${(usuario.genres && usuario.genres.join(', ')) || 'N/A'}</p>
+                <p><strong>Instrumentos:</strong> ${(usuario.instruments && usuario.instruments.join(', ')) || 'N/A'}</p>
+                <p><strong>Ubicación:</strong> ${usuario.city || 'N/A'}</p>
+                <a href="#" class="btn btn-link p-0" onclick="showDetails('${usuario.correo}', 'musico')">Ver Detalles</a>
+              </div>
+            </div>
+          </div>
+        `);
+      }
+    });
+
+    // Ofertas
+    filtradasOfertas.forEach(oferta => {
+      $section.append(`
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Oportunidad de Evento</h5>
+              <p><strong>Título:</strong> ${oferta.titulo}</p>
+              <p><strong>Descripción:</strong> ${oferta.descripcion}</p>
+              <p><strong>Ubicación:</strong> ${oferta.ciudad}</p>
+              <p><strong>Fecha:</strong> ${oferta.fecha}</p>
+              <a href="#" class="btn btn-link p-0" onclick="showDetails('${oferta.titulo}', 'oferta')">Ver Detalles</a>
+            </div>
+          </div>
+        </div>
+      `);
+    });
+
+    if (filtradosUsuarios.length === 0 && filtradasOfertas.length === 0) {
+      $section.append('<div class="col-12"><div class="alert alert-warning">No se encontraron resultados.</div></div>');
+    }
+  }
+
+  // Mostrar todos al cargar
+  renderResultados(usuarios.filter(u => u.rol === 'musico'), ofertas);
+
+  // Buscar por texto y tipo
+  $('.btn-light.text-white').click(function() {
+    const query = $('input[placeholder="Buscar oportunidades o músicos..."]').val().toLowerCase();
+    const tipo = $('#tipoBusqueda').val();
+
+    let filtradosUsuarios = [];
+    let filtradasOfertas = [];
+
+    if (tipo === 'musicos' || tipo === 'ambos') {
+      filtradosUsuarios = usuarios.filter(u =>
+        (u.rol === 'musico') &&
+        (
+          (u.nombre && u.nombre.toLowerCase().includes(query)) ||
+          (u.genres && u.genres.join(',').toLowerCase().includes(query)) ||
+          (u.city && u.city.toLowerCase().includes(query)) ||
+          (u.instruments && u.instruments.join(',').toLowerCase().includes(query))
+        )
+      );
+    }
+    if (tipo === 'ofertas' || tipo === 'ambos') {
+      filtradasOfertas = ofertas.filter(o =>
+        (o.titulo && o.titulo.toLowerCase().includes(query)) ||
+        (o.descripcion && o.descripcion.toLowerCase().includes(query)) ||
+        (o.ciudad && o.ciudad.toLowerCase().includes(query)) ||
+        (o.generos && o.generos.join(',').toLowerCase().includes(query))
+      );
+    }
+
+    // Si solo músicos
+    if (tipo === 'musicos') filtradasOfertas = [];
+    // Si solo ofertas
+    if (tipo === 'ofertas') filtradosUsuarios = [];
+
+    renderResultados(filtradosUsuarios, filtradasOfertas);
+  });
+
+  // Filtros por categoría (dinámicos)
+  $(document).on('change', '#genre', function() {
+    const selectedGenre = $(this).val();
+    const tipo = $('#tipoBusqueda').val();
+
+    let filtradosUsuarios = [];
+    let filtradasOfertas = [];
+
+    if (tipo === 'musicos') {
+      filtradosUsuarios = usuarios.filter(u =>
+        u.rol === 'musico' &&
+        u.genres &&
+        (selectedGenre === '' || u.genres.includes(selectedGenre))
+      );
+      filtradasOfertas = [];
+    } else if (tipo === 'ofertas') {
+      filtradasOfertas = ofertas.filter(o =>
+        o.generos &&
+        (selectedGenre === '' || o.generos.includes(selectedGenre))
+      );
+      filtradosUsuarios = [];
+    } else { // ambos
+      filtradosUsuarios = usuarios.filter(u =>
+        u.rol === 'musico' &&
+        u.genres &&
+        (selectedGenre === '' || u.genres.includes(selectedGenre))
+      );
+      filtradasOfertas = ofertas.filter(o =>
+        o.generos &&
+        (selectedGenre === '' || o.generos.includes(selectedGenre))
+      );
+    }
+
+    renderResultados(filtradosUsuarios, filtradasOfertas);
+  });
+
+  $(document).on('change', '#location', function() {
+    const selectedLocation = $(this).val();
+    const tipo = $('#tipoBusqueda').val();
+
+    let filtradosUsuarios = [];
+    let filtradasOfertas = [];
+
+    if (tipo === 'musicos') {
+      filtradosUsuarios = usuarios.filter(u =>
+        u.rol === 'musico' &&
+        u.city &&
+        (selectedLocation === '' || u.city === selectedLocation)
+      );
+      filtradasOfertas = [];
+    } else if (tipo === 'ofertas') {
+      filtradasOfertas = ofertas.filter(o =>
+        o.ciudad &&
+        (selectedLocation === '' || o.ciudad === selectedLocation)
+      );
+      filtradosUsuarios = [];
+    } else { // ambos
+      filtradosUsuarios = usuarios.filter(u =>
+        u.rol === 'musico' &&
+        u.city &&
+        (selectedLocation === '' || u.city === selectedLocation)
+      );
+      filtradasOfertas = ofertas.filter(o =>
+        o.ciudad &&
+        (selectedLocation === '' || o.ciudad === selectedLocation)
+      );
+    }
+
+    renderResultados(filtradosUsuarios, filtradasOfertas);
+  });
+
+  $(document).on('change', '#instrument', function() {
+    const selectedInstrument = $(this).val();
+    const tipo = $('#tipoBusqueda').val();
+
+    let filtradosUsuarios = [];
+    let filtradasOfertas = [];
+
+    if (tipo === 'musicos') {
+      filtradosUsuarios = usuarios.filter(u =>
+        u.rol === 'musico' &&
+        u.instruments &&
+        (selectedInstrument === '' || u.instruments.includes(selectedInstrument))
+      );
+      filtradasOfertas = [];
+    } else if (tipo === 'ofertas') {
+      // Si tus ofertas tienen instrumentos requeridos, puedes filtrar aquí
+      filtradasOfertas = [];
+      filtradosUsuarios = [];
+    } else { // ambos
+      filtradosUsuarios = usuarios.filter(u =>
+        u.rol === 'musico' &&
+        u.instruments &&
+        (selectedInstrument === '' || u.instruments.includes(selectedInstrument))
+      );
+      filtradasOfertas = ofertas; // No filtra por instrumento en ofertas
+    }
+
+    renderResultados(filtradosUsuarios, filtradasOfertas);
+  });
+
+  // Detalles (puedes personalizar esta función)
+  window.showDetails = function(id, tipo) {
+    let html = '';
+    if (tipo === 'musico') {
+      const usuario = usuarios.find(u => u.correo === id);
+      if (usuario) {
+        html = `
+          <h4 class="card-title">Perfil de Músico</h4>
+          <p><strong>Nombre:</strong> ${usuario.nombre}</p>
+          <p><strong>Géneros:</strong> ${(usuario.genres && usuario.genres.join(', ')) || 'N/A'}</p>
+          <p><strong>Instrumentos:</strong> ${(usuario.instruments && usuario.instruments.join(', ')) || 'N/A'}</p>
+          <p><strong>Ubicación:</strong> ${usuario.city || 'N/A'}</p>
+          <p><strong>Correo:</strong> ${usuario.correo}</p>
+        `;
+      }
+    } else if (tipo === 'oferta') {
+      const oferta = ofertas.find(o => o.titulo === id);
+      if (oferta) {
+        html = `
+          <h4 class="card-title">Oportunidad de Evento</h4>
+          <p><strong>Título:</strong> ${oferta.titulo}</p>
+          <p><strong>Descripción:</strong> ${oferta.descripcion}</p>
+          <p><strong>Ubicación:</strong> ${oferta.ciudad}</p>
+          <p><strong>Fecha:</strong> ${oferta.fecha}</p>
+          <p><strong>Géneros requeridos:</strong> ${(oferta.generos && oferta.generos.join(', ')) || 'N/A'}</p>
+        `;
+      }
+    }
+    $('#detailedView .card-body').html(html + '<button class="btn btn-secondary mt-3" onclick="closeDetails()">Cerrar</button>');
+    $('#detailedView').slideDown();
+  };
+
+  window.closeDetails = function() {
+    $('#detailedView').slideUp();
+  };
+
+  $('#btninicio').click(function(e) {
+    e.preventDefault();
+    window.location.href = 'Main.html';
+  });
+
+  // Mostrar/ocultar botón de instrumento según el tipo seleccionado
+  $('#tipoBusqueda').change(function() {
+    const tipo = $(this).val();
+    if (tipo === 'ofertas') {
+      $('[data-category="instrumento"]').hide();
+      // Si el filtro de instrumento está abierto, ciérralo
+      if ($('#filterOptions label[for="instrument"]').length) {
+        $('#filterOptions').hide().empty();
+      }
+    } else {
+      $('[data-category="instrumento"]').show();
+    }
+    $('.btn-light.text-white').click();
+  });
+  // Al cargar la página, oculta si es necesario
+  if ($('#tipoBusqueda').val() === 'ofertas') {
+    $('[data-category="instrumento"]').hide();
+  }
+});
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

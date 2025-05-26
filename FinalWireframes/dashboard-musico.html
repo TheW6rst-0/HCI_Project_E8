@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Músico - MusikHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .header-bg {
+      background-color: #3f0f80;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+    .profile-box {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: -60px;
+      position: relative;
+      z-index: 2;
+    }
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      margin-top: -70px;
+    }
+    .edit-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+    .info-section, .media-section, .opinion-section {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 1rem;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: .5rem;
+    }
+    .media-gallery img, .media-gallery video {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .opinion-card {
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .opinion-card:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .config-dropdown {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado -->
+  <div class="header-bg">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" id="btninicio" class="btn btn-light text-dark">Inicio</a>
+        <input type="text" class="form-control" placeholder="Busca músicos, trabajos, eventos..." style="width: 300px;">
+        <button class="btn btn-light text-dark" id="btnBuscar">Buscar</button>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-cog"></i> Configuración
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" id="switchToEmployer">Cambiar a cuenta de empleador</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Perfil y detalles -->
+  <div class="container">
+    <div class="profile-box position-relative mt-5 p-4">
+      <button class="btn btn-sm btn-outline-primary edit-btn" id="editProfile"><i class="fas fa-pen"></i> Editar perfil</button>
+      <div class="d-flex align-items-center">
+        <img id="profileImg" src="" alt="Foto de perfil" class="profile-img me-3">
+        <div>
+          <h5 id="profileName" class="mb-0"></h5>
+          <p id="profileRole" class="text-muted mb-0"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <div class="info-section">
+          <div class="section-title">Información del Músico</div>
+          <p><strong>Contacto:</strong> <span id="profileContact"></span></p>
+          <p><strong>Miembros:</strong> <span id="profileBand"></span></p>
+          <p><strong>Formación:</strong> <span id="profileFormation"></span></p>
+          <p><strong>Instrumentos que toca:</strong> <span id="profileInstruments"></span></p>
+          <p><strong>Géneros:</strong> <span id="profileGenres"></span></p>
+          <p><strong>Experiencia:</strong> <span id="profileExperience"></span></p>
+          <p><strong>Repertorio:</strong> <span id="profileRepertoire"></span></p>
+          
+          <div class="mt-4">
+            <div class="section-title">Acerca de ti</div>
+            <p id="profileAbout"></p>
+          </div>
+
+          <div class="mt-4">
+            <div class="section-title">Redes sociales</div>
+            <p id="socialLinks"></p>
+          </div>
+        </div>
+
+        <div class="opinion-section">
+          <div class="section-title">Opiniones</div>
+          <!-- Opiniones dinámicas -->
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="media-section">
+          <div class="section-title">Fotos</div>
+          <div class="media-gallery">
+            <!-- Fotos dinámicas -->
+          </div>
+        </div>
+        <div class="media-section">
+          <div class="section-title">Videos</div>
+          <div class="media-gallery">
+            <!-- Videos dinámicos -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Cargar datos del usuario desde localStorage
+      const usuario = JSON.parse(localStorage.getItem('usuarioActual')) || {};
+
+      // Asignar valores a los campos, usando valores predeterminados si no están presentes
+      $('#profileName').text(usuario.name || 'Nombre no disponible');
+      $('#profileContact').html(`
+        <strong>Correo:</strong> ${usuario.email || 'Correo no disponible'}<br>
+        <strong>Teléfono:</strong> ${usuario.phone || 'Teléfono no disponible'}
+      `);
+      $('#profileBand').text(usuario.members || 'Miembros no disponibles');
+      $('#profileFormation').text(usuario.formation ? usuario.formation.join(', ') : 'Formación no disponible');
+      $('#profileInstruments').text(usuario.instruments ? usuario.instruments.join(', ') : 'Instrumentos no disponibles');
+      $('#profileGenres').text(usuario.genres ? usuario.genres.join(', ') : 'Géneros no disponibles');
+      $('#profileExperience').text(usuario.experience || 'Experiencia no disponible');
+      $('#profileRepertoire').text(usuario.repertoire || 'Repertorio no disponible');
+      $('#profileAbout').text(usuario.about || 'Acerca de ti no disponible');
+      $('#profileImg').attr('src', usuario.profileImg || 'https://randomuser.me/api/portraits/men/64.jpg');
+      $('#socialLinks').html(`
+        <a href="${usuario.youtube || '#'}" target="_blank" class="btn btn-outline-danger btn-sm me-2">
+          <i class="fab fa-youtube"></i> YouTube
+        </a>
+        <a href="${usuario.instagram || '#'}" target="_blank" class="btn btn-outline-danger btn-sm me-2">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="${usuario.tiktok || '#'}" target="_blank" class="btn btn-outline-dark btn-sm me-2">
+          <i class="fab fa-tiktok"></i> TikTok
+        </a>
+        <a href="${usuario.spotify || '#'}" target="_blank" class="btn btn-outline-success btn-sm">
+          <i class="fab fa-spotify"></i> Spotify
+        </a>
+      `);
+
+      // Hacer que el botón de Inicio funcione
+      $('#btninicio').click(() => {
+        window.location.href = 'Main.html';
+      });
+
+      // Al hacer clic en el botón de editar
+      $('#editProfile').click(() => {
+        window.location.href = 'ManagementProfile.html'; // Redirige al perfil de edición
+      });
+
+      // Cambiar a la vista de empleador
+      $('#switchToEmployer').click(() => {
+        window.location.href = 'dashboard-empleador.html';
+      });
+
+      // Función para cerrar sesión
+      $('#logoutBtn').click(() => {
+        localStorage.removeItem('usuarioActual'); // Eliminar datos del usuario
+        localStorage.removeItem('rolActual'); // Eliminar el rol actual
+        window.location.href = 'Main.html'; // Redirigir al usuario al Main.html
+      });
+
+      // Redirige al buscador al hacer clic en el botón "Buscar"
+      $('#btnBuscar').click(function() {
+        window.location.href = 'Buscador.html';
+      });
+    });
+  </script>
+</body>
+</html>
