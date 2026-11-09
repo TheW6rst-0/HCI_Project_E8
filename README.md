@@ -38,14 +38,6 @@ Furthermore, to ensure our project meets real user needs, we conducted:
 - **Figma** – Wireframing & UI/UX Design  
 - **Jira** - Project Planning and Organization 
 
-## Contributors  
-- Ian Rodriguez
-- Alexander Pinzon
-- Eduardo Ortiz
-- Frida Pineda
-- Emiliano Orduño
-- Astrid Osorno
-
 ---
 ### For further development:
 - [See Iteration Log](lean_ux/iteration_log.md)
